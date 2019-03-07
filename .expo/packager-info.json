@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
+  "devToolsPort": 19003,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 4756,
+  "packagerPort": 19004,
+  "packagerPid": 7061,
   "expoServerNgrokUrl": "https://g2-vkc.anonymous.nomad-movies.exp.direct",
   "packagerNgrokUrl": "https://packager.g2-vkc.anonymous.nomad-movies.exp.direct",
-  "ngrokPid": 4879
+  "ngrokPid": 7133
 }
