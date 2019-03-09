@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppLoading, Font, Asset } from "expo";
+import { StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MainNavigation from "./navigation/MainNavigation";
 
@@ -26,7 +27,10 @@ export default class App extends React.Component {
     const {loaded} = this.state;
     if(loaded) {
       return (
-        <MainNavigation />
+        <>
+          <StatusBar barStyle="light-content" />
+          <MainNavigation />
+        </>
       );
     } else {
       return (

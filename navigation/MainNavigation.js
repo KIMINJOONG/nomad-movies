@@ -11,12 +11,13 @@ const MainNavigation = createStackNavigator(
         Detail: {
             screen: DetailScreen,
             navigationOptions: {
-                ...headerStyles
+                ...headerStyles,
             }
         }
     },
     {
-        mode: "modal"
+        headerMode: "screen",
+        headerBackTitleVisible: false
     }
 );
 
