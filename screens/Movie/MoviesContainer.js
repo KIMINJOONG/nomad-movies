@@ -1,7 +1,6 @@
 import React from "react";
 import MoviesPresenter from "./MoviesPresenter";
 import { moviesApi } from "../../Api";
-import console = require("console");
 
 export default class MoviesContainer extends React.Component{
     state = {
@@ -44,7 +43,12 @@ export default class MoviesContainer extends React.Component{
     render(){
         const { loading, upcoming, popular, nowPlaying } = this.state;
         return(
-            <MoviesPresenter loading= {loading} />
+            <MoviesPresenter 
+                loading= {loading} 
+                upcoming={upcoming}
+                popular={popular}
+                nowPlaying={nowPlaying}
+            />
         );
     }
 }
