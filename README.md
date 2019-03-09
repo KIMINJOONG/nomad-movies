@@ -17,3 +17,4 @@ with React Native.
 - [ ] Top Rated (TV, Movie)
 - [ ] Popular (TV, Movie)
 - [ ] Airing Today (TV)
+- [ ] Search (TV, Movie)
