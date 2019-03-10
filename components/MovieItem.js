@@ -5,17 +5,23 @@ import MoviePoster from "./MoviePoster";
 import MovieRating from "./MovieRating";
 
 const Container = styled.View`
+    align-items: center;
+    margin-right: 20px;
+
 `;
 
 const Title = styled.Text`
     color: white;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 `;
 
 const MovieItem = ({id, posterPhoto, title,voteAvg }) => (
     <Container>
         <MoviePoster path={posterPhoto} />
         <Title>
-            {title}
+            {title.length > 13 ? `${title.substring(0, 10)}...` : title}
         </Title>
         <MovieRating votes={voteAvg} />
     </Container>
