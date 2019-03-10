@@ -1,5 +1,5 @@
 import React from "react";
-import { Text} from "react-native";
+import PropTypes from "prop-types";
 import DetailPResenter from "./DetailPresenter";
 
 export default class ReactContainer extends React.Component{
@@ -8,6 +8,7 @@ export default class ReactContainer extends React.Component{
             title: navigation.getParam("title")
         };
     };
+
 
     constructor(props) {
         super(props);
