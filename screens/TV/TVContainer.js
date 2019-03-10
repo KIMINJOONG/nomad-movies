@@ -4,7 +4,7 @@ import { tvApi } from "../../Api";
 
 export default class TVContainer extends React.Component{
     state = {
-        topRated: null
+        airingThisWeek: null
         , popular: null
         , airingToday: null
         , loading: true
@@ -12,12 +12,12 @@ export default class TVContainer extends React.Component{
     }
 
     async componentDidMount() {
-        let topRated,popular, airingToday, error;
+        let airingThisWeek,popular, airingToday, error;
 
         try{
             ({
-                data: { results: topRated}
-            } = await tvApi.topRated());
+                data: { results: airingThisWeek}
+            } = await tvApi.airingThisWeek());
             ({
                 data: {results : popular}
             } = await tvApi.popular());
@@ -29,7 +29,7 @@ export default class TVContainer extends React.Component{
         }finally{
             this.setState({
                 loading: false,
-                topRated,
+                airingThisWeek,
                 popular,
                 airingToday,
                 error
@@ -38,13 +38,13 @@ export default class TVContainer extends React.Component{
     }
 
     render() {
-        const { loading, popular, topRated, airingToday } = this.state;
+        const { loading, popular, airingThisWeek, airingToday } = this.state;
         console.log(this.state);
         return(
             <TVPresenter 
                 loading={loading}
                 popular={popular}
-                topRated={topRated}
+                airingThisWeek={airingThisWeek}
                 airingToday={airingToday} 
             />
         );

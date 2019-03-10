@@ -34,6 +34,22 @@ const MoviesPresenter = ({loading, upcoming, popular, nowPlaying})  =>
                     ))}
                 </Section>
             ) : null}
+            {popular ?( 
+                <Section horizontal={false} title={"Popular Movies"}>
+                    {popular
+                        .filter(movie => movie.poster_path !== null)
+                        .map(movie => (
+                            <MovieItem 
+                                key={movie.id}
+                                id={movie.id}
+                                posterPhoto={movie.poster_path} 
+                                title={movie.title} 
+                                voteAvg={movie.vote_average}
+                            />
+                    ))}
+                </Section>
+            ) : null}
+
         </Container>
     );
 

@@ -17,15 +17,18 @@ const Title = styled.Text`
     margin-bottom: 5px;
 `;
 
-const MovieItem = ({id, posterPhoto, title,voteAvg }) => (
-    <Container>
-        <MoviePoster path={posterPhoto} />
-        <Title>
-            {title.length > 13 ? `${title.substring(0, 10)}...` : title}
-        </Title>
-        <MovieRating votes={voteAvg} />
-    </Container>
-);
+const MovieItem = ({id, posterPhoto, title,voteAvg, horizontal = false }) => 
+    horizontal ? (
+        null
+    ) : (
+        <Container>
+            <MoviePoster path={posterPhoto} />
+            <Title>
+                {title.length > 13 ? `${title.substring(0, 10)}...` : title}
+            </Title>
+            <MovieRating votes={voteAvg} />
+        </Container>
+    );
 
 MovieItem.propTypes = {
     id: PropTypes.number.isRequired,
