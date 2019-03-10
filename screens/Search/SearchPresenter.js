@@ -72,6 +72,7 @@ const SearchPresenter = ({loading, movieResults, tvResults, searchTerm, handleSe
                             .filter(tv => tv.poster_path !== null)
                             .map(tv => (
                                 <MovieItem 
+                                    isMovie={false}
                                     key={tv.id}
                                     id={tv.id}
                                     posterPhoto={tv.poster_path} 
