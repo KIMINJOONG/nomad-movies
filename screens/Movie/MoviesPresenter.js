@@ -40,10 +40,12 @@ const MoviesPresenter = ({loading, upcoming, popular, nowPlaying})  =>
                         .filter(movie => movie.poster_path !== null)
                         .map(movie => (
                             <MovieItem 
+                                horizontal={true}
                                 key={movie.id}
                                 id={movie.id}
                                 posterPhoto={movie.poster_path} 
                                 title={movie.title} 
+                                overview={movie.overview}
                                 voteAvg={movie.vote_average}
                             />
                     ))}

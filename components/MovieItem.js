@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import MoviePoster from "./MoviePoster";
 import MovieRating from "./MovieRating";
+import { GREY_COLOR } from "../constants/Colors";
 
 const Container = styled.View`
     align-items: center;
@@ -12,14 +13,46 @@ const Container = styled.View`
 
 const Title = styled.Text`
     color: white;
-    font-size: 12px;
+    font-size: ${props => !props.big ? "12px" : "14px"};
     margin-top: 5px;
     margin-bottom: 5px;
 `;
 
-const MovieItem = ({id, posterPhoto, title,voteAvg, horizontal = false }) => 
+const HContainer = styled.View`
+    margin-bottom: 20px;
+    flex-direction: row;
+`;
+
+const Column = styled.View`
+    margin-left: 20px;
+    width: 60%;
+`;
+
+const Overview = styled.Text`
+    color: ${GREY_COLOR};
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+`;
+
+const MovieItem = ({id, posterPhoto, title,voteAvg, horizontal = false, overview }) => 
     horizontal ? (
-        null
+        <HContainer>
+            <MoviePoster path={posterPhoto} />
+            <Column>
+                <Title big={true}>
+                    {title}
+                </Title>
+                <MovieRating votes={voteAvg} />
+                {overview ? (
+                    <Overview>
+                        {overview.length > 150 
+                        ? `${overview.substring(0, 147)}...`
+                        : overview} 
+                    </Overview>
+                    ) : null}
+            </Column>
+        </HContainer>
     ) : (
         <Container>
             <MoviePoster path={posterPhoto} />
@@ -35,6 +68,7 @@ MovieItem.propTypes = {
     posterPhoto: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     voteAvg: PropTypes.number.isRequired,
+    overview: PropTypes.string
 };
 
 export default MovieItem;
