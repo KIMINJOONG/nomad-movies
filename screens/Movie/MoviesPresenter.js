@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Loader from "../../components/Loader";
 import styled from "styled-components";
 import MovieSlider from "../../components/MovieSlider";
+import Section from "../../components/Section";
 
 const Container = styled.ScrollView`
     background-color: black;
@@ -16,9 +17,8 @@ const MoviesPresenter = ({loading, upcoming, popular, nowPlaying})  =>
         <Loader />
     ) : (
         <Container>
-            <MovieSlider 
-                movies={nowPlaying}
-            />
+            {nowPlaying ? <MovieSlider movies={nowPlaying} /> : null}
+            {upcoming ? <Section movies={upcoming} title={"Upcoming Movies"} /> : null}
         </Container>
     );
 
