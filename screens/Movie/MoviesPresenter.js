@@ -28,8 +28,11 @@ const MoviesPresenter = ({loading, upcoming, popular, nowPlaying})  =>
                                 key={movie.id}
                                 id={movie.id}
                                 posterPhoto={movie.poster_path} 
-                                title={movie.title} 
+                                title={movie.title}
+                                overview={movie.overview} 
                                 voteAvg={movie.vote_average}
+                                runtime={movie.runtime}
+                                languages={movie.spoken_languages}
                             />
                     ))}
                 </Section>
@@ -47,6 +50,9 @@ const MoviesPresenter = ({loading, upcoming, popular, nowPlaying})  =>
                                 title={movie.title} 
                                 overview={movie.overview}
                                 voteAvg={movie.vote_average}
+                                runtime={movie.runtime}
+                                languages={movie.spoken_languages}
+                                videos={movie.videos}
                             />
                     ))}
                 </Section>

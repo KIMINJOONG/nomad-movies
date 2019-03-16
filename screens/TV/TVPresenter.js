@@ -45,6 +45,7 @@ const TVPresenter = ({ loading, popular, airingThisWeek, airingToday }) => (
                             posterPhoto={tv.poster_path} 
                             title={tv.name} 
                             voteAvg={tv.vote_average}
+                            firstAirDate={first_air_date}
                         />
                     ))}
             </Section>
@@ -64,6 +65,7 @@ const TVPresenter = ({ loading, popular, airingThisWeek, airingToday }) => (
                             posterPhoto={tv.poster_path} 
                             title={tv.name} 
                             voteAvg={tv.vote_average}
+                            firstAirDate={first_air_date}
                         />
                     ))}
             </Section>

@@ -78,7 +78,21 @@ const Genres = styled.Text`
 `;
 
 
-const DeatailPresenter = ({isMovie, posterPhoto, backgroundPhoto, title, voteAvg, overview, loading, date, status,genres}) => (
+const DeatailPresenter = ({
+        isMovie, 
+        posterPhoto, 
+        backgroundPhoto, 
+        title, 
+        voteAvg, 
+        overview, 
+        loading, 
+        date, 
+        status,
+        genres, 
+        runtime,
+        languages,
+        videos
+    }) => (
     <Container>
         <Header>
             <BgImage source={{uri: makePhotoUrl(backgroundPhoto)}}/>
@@ -115,17 +129,41 @@ const DeatailPresenter = ({isMovie, posterPhoto, backgroundPhoto, title, voteAvg
                     </ContentValue>
                 </DataContainer>
                 ) : null}
-                {status ? (
+                {languages ? (
                 <DataContainer>
-                    <ContentTitle>Status</ContentTitle>
+                    <ContentTitle>Overview</ContentTitle>
                     <ContentValue> 
-                        {status}
+                        {languages.map((language, index) => index === languages.length - 1 ? language.name : `${language.name} , `)}
                     </ContentValue>
                 </DataContainer>
                 ) : null}
                 {date ? (
                 <DataContainer>
                     <ContentTitle>{isMovie ? "Realease Date" : "First Episode"}</ContentTitle>
+                    <ContentValue> 
+                        {date}
+                    </ContentValue>
+                </DataContainer>
+                ) : null}
+                {runtime ? (
+                <DataContainer>
+                    <ContentTitle>{isMovie ? "상영시간" : "방영시간"}</ContentTitle>
+                    <ContentValue> 
+                        {runtime}분
+                    </ContentValue>
+                </DataContainer>
+                ) : null}
+                {videos ? (
+                <DataContainer>
+                    <ContentTitle>{isMovie ? "예고편" : "방영시간"}</ContentTitle>
+                    {videos.results
+                        .map(video => <ContentValue key={video.id}>{video.name}</ContentValue>)}
+                </DataContainer>
+                ) : null}
+
+                {status ? (
+                <DataContainer>
+                    <ContentTitle>Status</ContentTitle>
                     <ContentValue> 
                         {status}
                     </ContentValue>
@@ -145,7 +183,7 @@ DeatailPresenter.propTypes = {
     isMovie:PropTypes.bool.isRequired,
     status: PropTypes.string,
     date: PropTypes.string,
-    genres: PropTypes.array
+    genres: PropTypes.array,
 }
 
 export default DeatailPresenter;

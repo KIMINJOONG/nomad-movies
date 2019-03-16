@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DetailPResenter from "./DetailPresenter";
+import DetailPresenter from "./DetailPresenter";
 import {moviesApi,tvApi } from "../../Api";
 
 export default class ReactContainer extends React.Component{
@@ -15,7 +15,18 @@ export default class ReactContainer extends React.Component{
         super(props);
         const { navigation : {
             state: {
-                params: { isMovie, id, posterPhoto, backgroundPhoto, title, voteAvg, overview, loading
+                params: { 
+                    isMovie, 
+                    id, 
+                    posterPhoto, 
+                    backgroundPhoto, 
+                    title, 
+                    voteAvg, 
+                    overview, 
+                    runtime,
+                    languages, 
+                    videos,
+                    loading
                 }
             }
         } 
@@ -28,13 +39,16 @@ export default class ReactContainer extends React.Component{
             title,
             voteAvg,
             overview,
-            loading : true
+            loading : true,
+            runtime,
+            languages,
+            videos
         };
     }
 
     async componentDidMount() {
         const {isMovie, id} = this.state;
-        let error, genres, overview, status, date, backgroundPhoto;
+        let error, genres, overview, status, date, backgroundPhoto, runtime, languages, videos;
         try{
             if(isMovie) {
                 ({
@@ -43,7 +57,10 @@ export default class ReactContainer extends React.Component{
                         overview, 
                         status, 
                         release_date: date, 
-                        backdrop_path: backgroundPhoto
+                        backdrop_path: backgroundPhoto,
+                        runtime,
+                        languages,
+                        videos
                     }
                 } = await moviesApi.movieDetail(id));
             } else {
@@ -66,16 +83,35 @@ export default class ReactContainer extends React.Component{
                 overview,
                 status,
                 date,
-                backgroundPhoto
+                backgroundPhoto,
+                runtime,
+                languages,
+                videos
             });
         }
     }
 
     render() {
-        const {isMovie,id, posterPhoto, backgroundPhoto, title, voteAvg, overview, loading, date, status, genres} = this.state;
+        console.log(this.state);
+        const {
+            isMovie,
+            id, 
+            posterPhoto, 
+            backgroundPhoto, 
+            title, 
+            voteAvg, 
+            overview, 
+            loading, 
+            date, 
+            status, 
+            genres, 
+            runtime,
+            languages,
+            videos
+        } = this.state;
         return(
             
-            <DetailPResenter 
+            <DetailPresenter 
                 isMovie={isMovie}
                 id={id}
                 posterPhoto={posterPhoto}
@@ -87,6 +123,9 @@ export default class ReactContainer extends React.Component{
                 date={date}
                 status={status}
                 genres={genres}
+                runtime={runtime}
+                languages={languages}
+                videos={videos}
             />
         )
     }
