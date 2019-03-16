@@ -45,11 +45,6 @@ const MovieItem = ({
     horizontal = false,
      overview, 
      isMovie= true,
-     runtime,
-     languages,
-     videos,
-     firstAirDate,
-
      navigation 
      }) => (
 <TouchableWithoutFeedback onPress={() => 
@@ -62,11 +57,7 @@ const MovieItem = ({
             backgroundPhoto: null,
             title,
             voteAvg, 
-            overview,
-            runtime,
-            languages,
-            videos,
-            firstAirDate
+            overview
         } 
     }
         )}
@@ -107,8 +98,6 @@ MovieItem.propTypes = {
     voteAvg: PropTypes.number.isRequired,
     overview: PropTypes.string,
     isMovie: PropTypes.bool,
-    runtime: PropTypes.number,
-    languages: PropTypes.array,
 };
 
 export default withNavigation(MovieItem);

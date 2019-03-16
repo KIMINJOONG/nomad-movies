@@ -9,6 +9,7 @@ import makePhotoUrl from "../../utils/makePhotoUrl";
 import MovieRating from "../../components/MovieRating";
 import { Platform } from "react-native";
 import Loader from "../../components/Loader";
+import { Ionicons } from "@expo/vector-icons";
 
 const Container = styled.ScrollView`
     background-color: ${BG_COLOR};
@@ -91,7 +92,11 @@ const DeatailPresenter = ({
         genres, 
         runtime,
         languages,
-        videos
+        videos,
+        lastAirDate,
+        totalEpisode,
+        totalSeason,
+        handleYoutube
     }) => (
     <Container>
         <Header>
@@ -131,7 +136,7 @@ const DeatailPresenter = ({
                 ) : null}
                 {languages ? (
                 <DataContainer>
-                    <ContentTitle>Overview</ContentTitle>
+                    <ContentTitle>언어</ContentTitle>
                     <ContentValue> 
                         {languages.map((language, index) => index === languages.length - 1 ? language.name : `${language.name} , `)}
                     </ContentValue>
@@ -139,9 +144,33 @@ const DeatailPresenter = ({
                 ) : null}
                 {date ? (
                 <DataContainer>
-                    <ContentTitle>{isMovie ? "Realease Date" : "First Episode"}</ContentTitle>
+                    <ContentTitle>{isMovie ? "최초 개봉 날짜" : "최초 방영 날짜"}</ContentTitle>
                     <ContentValue> 
                         {date}
+                    </ContentValue>
+                </DataContainer>
+                ) : null}
+                {lastAirDate ? (
+                <DataContainer>
+                    <ContentTitle>마지막 방영 날짜</ContentTitle>
+                    <ContentValue> 
+                        {lastAirDate}
+                    </ContentValue>
+                </DataContainer>
+                ) : null}
+                {totalEpisode ? (
+                <DataContainer>
+                    <ContentTitle>총 에피소드</ContentTitle>
+                    <ContentValue> 
+                        {totalEpisode}개
+                    </ContentValue>
+                </DataContainer>
+                ) : null}
+                {totalSeason ? (
+                <DataContainer>
+                    <ContentTitle>총 시즌</ContentTitle>
+                    <ContentValue> 
+                        {totalSeason}개
                     </ContentValue>
                 </DataContainer>
                 ) : null}
@@ -157,7 +186,13 @@ const DeatailPresenter = ({
                 <DataContainer>
                     <ContentTitle>{isMovie ? "예고편" : "방영시간"}</ContentTitle>
                     {videos.results
-                        .map(video => <ContentValue key={video.id}>{video.name}</ContentValue>)}
+                        .map(
+                            video => 
+                            <ContentValue key={video.id} onPress={() => handleYoutube(video.key)}>
+                                <Ionicons name="logo-youtube" />
+                                {video.name}
+                            </ContentValue>
+                            )}
                 </DataContainer>
                 ) : null}
 

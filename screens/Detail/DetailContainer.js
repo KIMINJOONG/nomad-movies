@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import DetailPresenter from "./DetailPresenter";
 import {moviesApi,tvApi } from "../../Api";
+import { Linking } from "expo";
 
 export default class ReactContainer extends React.Component{
     static navigationOptions = ({ navigation }) => {
@@ -22,10 +23,14 @@ export default class ReactContainer extends React.Component{
                     backgroundPhoto, 
                     title, 
                     voteAvg, 
-                    overview, 
+                    overview,
+                    date,
                     runtime,
-                    languages, 
+                    languages,
                     videos,
+                    lastAirDate,
+                    totalEpisode,
+                    totalSeason,
                     loading
                 }
             }
@@ -39,16 +44,20 @@ export default class ReactContainer extends React.Component{
             title,
             voteAvg,
             overview,
-            loading : true,
+            date,
             runtime,
             languages,
-            videos
+            videos,
+            lastAirDate,
+            totalEpisode,
+            totalSeason,
+            loading : true,
         };
     }
 
     async componentDidMount() {
         const {isMovie, id} = this.state;
-        let error, genres, overview, status, date, backgroundPhoto, runtime, languages, videos;
+        let error, genres, overview, status, date, backgroundPhoto, runtime, languages, videos, lastAirDate,totalEpisode,totalSeason;
         try{
             if(isMovie) {
                 ({
@@ -59,7 +68,7 @@ export default class ReactContainer extends React.Component{
                         release_date: date, 
                         backdrop_path: backgroundPhoto,
                         runtime,
-                        languages,
+                        spoken_languages: languages,
                         videos
                     }
                 } = await moviesApi.movieDetail(id));
@@ -70,7 +79,10 @@ export default class ReactContainer extends React.Component{
                         overview, 
                         status, 
                         first_air_date: date, 
-                        backdrop_path: backgroundPhoto
+                        last_air_date: lastAirDate,
+                        backdrop_path: backgroundPhoto,
+                        number_of_episodes : totalEpisode,
+                        number_of_seasons : totalSeason
                     }
                 } = await tvApi.showDetail(id));
             }
@@ -86,10 +98,17 @@ export default class ReactContainer extends React.Component{
                 backgroundPhoto,
                 runtime,
                 languages,
-                videos
+                videos,
+                lastAirDate,
+                totalEpisode,
+                totalSeason
             });
         }
     }
+
+    _handleYoutube = (youtubeKey) => {
+        Linking.openURL(`https://www.youtube.com/embed/${youtubeKey}`);
+    };
 
     render() {
         console.log(this.state);
@@ -107,8 +126,12 @@ export default class ReactContainer extends React.Component{
             genres, 
             runtime,
             languages,
-            videos
+            videos,
+            lastAirDate,
+            totalEpisode,
+            totalSeason
         } = this.state;
+        const { _handleYoutube } = this;
         return(
             
             <DetailPresenter 
@@ -126,6 +149,10 @@ export default class ReactContainer extends React.Component{
                 runtime={runtime}
                 languages={languages}
                 videos={videos}
+                lastAirDate={lastAirDate}
+                totalEpisode={totalEpisode}
+                totalSeason={totalSeason}
+                handleYoutube={_handleYoutube}
             />
         )
     }
