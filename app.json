@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "nomad-movies",
-    "slug": "nomad-movies",
+    "name": "오늘 뭐 볼까?",
+    "slug": "kohubi-movie",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [

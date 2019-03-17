@@ -31,6 +31,7 @@ export default class ReactContainer extends React.Component{
                     lastAirDate,
                     totalEpisode,
                     totalSeason,
+                    videoKey,
                     loading
                 }
             }
@@ -51,6 +52,7 @@ export default class ReactContainer extends React.Component{
             lastAirDate,
             totalEpisode,
             totalSeason,
+            videoKey : "",
             loading : true,
         };
     }
@@ -107,7 +109,10 @@ export default class ReactContainer extends React.Component{
     }
 
     _handleYoutube = (youtubeKey) => {
-        Linking.openURL(`https://www.youtube.com/embed/${youtubeKey}`);
+        //Linking.openURL(`https://www.youtube.com/embed/${youtubeKey}`);
+        this.setState({
+            videoKey: youtubeKey
+        })
     };
 
     render() {
@@ -128,7 +133,8 @@ export default class ReactContainer extends React.Component{
             videos,
             lastAirDate,
             totalEpisode,
-            totalSeason
+            totalSeason,
+            videoKey
         } = this.state;
         const { _handleYoutube } = this;
         return(
@@ -152,6 +158,7 @@ export default class ReactContainer extends React.Component{
                 totalEpisode={totalEpisode}
                 totalSeason={totalSeason}
                 handleYoutube={_handleYoutube}
+                videoKey={videoKey}
             />
         )
     }

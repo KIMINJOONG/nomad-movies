@@ -7,7 +7,7 @@ import { BG_COLOR, TINT_COLOR } from "../../constants/Colors";
 import Layout from "../../constants/Layout";
 import makePhotoUrl from "../../utils/makePhotoUrl";
 import MovieRating from "../../components/MovieRating";
-import { Platform } from "react-native";
+import { Platform, WebView } from "react-native";
 import Loader from "../../components/Loader";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -78,6 +78,10 @@ const Genres = styled.Text`
     margin-top: 10px;
 `;
 
+const WebviewContainer = styled.View`
+    height: 240px;
+`;
+
 
 const DeatailPresenter = ({
         isMovie, 
@@ -96,7 +100,8 @@ const DeatailPresenter = ({
         lastAirDate,
         totalEpisode,
         totalSeason,
-        handleYoutube
+        handleYoutube,
+        videoKey
     }) => (
     <Container>
         <Header>
@@ -184,6 +189,15 @@ const DeatailPresenter = ({
                 ) : null}
                 {videos ? (
                 <DataContainer>
+                    {videoKey != "" &&
+                        <WebviewContainer>
+                            <WebView 
+                                javaScriptEnabled={true}
+                                domStorageEnabled={true}
+                                source={{ uri: `https://www.youtube.com/embed/${videoKey}` }}
+                            />
+                        </WebviewContainer>
+                    }
                     <ContentTitle>{isMovie ? "예고편" : "방영시간"}</ContentTitle>
                     {videos.results
                         .map(
